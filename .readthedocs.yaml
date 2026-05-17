@@ -11,8 +11,10 @@ build:
     python: "3.12"
 
 # Build documentation with Mkdocs
-mkdocs:
-   configuration: mkdocs.yml
+sphinx:
+  configuration: docs/conf.py
+# mkdocs:
+#    configuration: mkdocs.yml
 
 # Optionally, but recommended,
 # declare the Python requirements required to build your documentation
