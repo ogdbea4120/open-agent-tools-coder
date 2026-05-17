@@ -1,6 +1,6 @@
 [project]
 name = "oats-coder"
-version = "1.0.12"
+version = "1.0.13"
 description = "Open Agent Tools (oats) enables small-to-large self-hosted ai models to use local source code when running tool-calling agentic workloads. We actively data mine 20,970+ (2+ TB) popular github repos using large and small ai models to create reuseable: json, markdown and parquet files for local-first tool-calling models."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -48,6 +48,11 @@ dev = [
     "pytest-cov>=4.0.0",
     "black>=24.0.0",
 ]
+docs = [
+    "sphinx>=7.0.0",
+    "sphinx-rtd-theme>=2.0.0",
+    "sphinx-autodoc-typehints>=2.0.0",
+]
 
 [project.scripts]
 oat = "oats.cli.interactive:main"
@@ -59,7 +64,7 @@ setup-coder = "oats.setup_coder_config:main"
 
 [project.urls]
 Homepage = "https://openagent.tools/"
-Documentation = "https://openagent.tools/"
+Documentation = "https://open-agent-tools-coder.readthedocs.io/"
 Repository = "https://github.com/district-solutions/open-agent-tools-coder"
 
 [tool.hatch.build.targets.wheel]

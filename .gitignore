@@ -82,3 +82,7 @@ oats/.projectplan
 mcp_index.json
 unsloth_compiled_cache
 stack/models/hf/google/functiongemma-270m-it
+
+# Docs
+docs/_build/
+docs/_static/
