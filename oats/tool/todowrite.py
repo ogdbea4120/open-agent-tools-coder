@@ -1,5 +1,14 @@
 """
 TodoWrite tool for task management.
+
+Provides :class:`TodoWriteTool` and :class:`TodoReadTool` for creating,
+managing, and reading structured task lists. Tasks are persisted to
+session-scoped storage via :class:`KeyValueStorage`.
+
+Data models:
+
+- :class:`TodoItem` — A single task item with content, status, and active form.
+- :class:`TodoList` — A list of :class:`TodoItem` objects.
 """
 
 from __future__ import annotations
@@ -43,7 +52,20 @@ _todo_storage = KeyValueStorage("todos")
 
 
 class TodoWriteTool(Tool):
-    """Manage a task list for the current session."""
+    """Create and manage a structured task list for tracking progress.
+
+    Persists todo items to session-scoped storage. Supports three statuses:
+    ``pending``, ``in_progress``, and ``completed``. Each item has a
+    description (``content``) and a present-tense active form.
+
+    Example:
+        ::
+
+            todowrite todos=[
+                {"content": "Implement auth", "status": "in_progress", "activeForm": "Implementing auth"},
+                {"content": "Write tests", "status": "pending", "activeForm": "Writing tests"}
+            ]
+    """
 
     @property
     def name(self) -> str:
@@ -177,7 +199,16 @@ Example:
 
 
 class TodoReadTool(Tool):
-    """Read the current task list for this session."""
+    """Read and display the current task list for the session.
+
+    Loads the persisted todo list from session-scoped storage and formats
+    it with status icons and a progress summary.
+
+    Example:
+        ::
+
+            toread
+    """
 
     @property
     def name(self) -> str:

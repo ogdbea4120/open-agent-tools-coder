@@ -1,5 +1,9 @@
 """
 MultiEdit tool for applying multiple edits to a file in sequence.
+
+Provides :class:`MultiEditTool` which applies multiple text replacements
+to a single file in sequence. Each edit sees the results of earlier ones,
+and the file is written only if at least one replacement was made.
 """
 
 from __future__ import annotations
@@ -15,7 +19,20 @@ log = cl("tool.multiedit")
 
 
 class MultiEditTool(Tool):
-    """Apply multiple edits to a single file in sequence."""
+    """Apply multiple text replacements to a single file in sequence.
+
+    Each edit is applied in order so that later edits see the results of
+    earlier ones. The file is written only if at least one replacement
+    was made, ensuring atomicity.
+
+    Example:
+        ::
+
+            multiedit file_path="src/main.py" edits=[
+                {"old_string": "def a():", "new_string": "def b():"},
+                {"old_string": "def c():", "new_string": "def d():"}
+            ]
+    """
 
     @property
     def name(self) -> str:
@@ -68,13 +85,29 @@ all edits are applied atomically."""
         }
 
     def requires_permission(self, args: dict[str, Any], ctx: ToolContext) -> str | None:
-        """MultiEdit requires permission."""
+        """MultiEdit operations always require user permission.
+
+        Args:
+            args: The tool arguments containing ``file_path`` and ``edits``.
+            ctx: The tool execution context.
+
+        Returns:
+            A permission prompt string describing the number of edits and target file.
+        """
         file_path = args.get("file_path", "")
         num_edits = len(args.get("edits", []))
         return f"Apply {num_edits} edits to: {file_path}"
 
     def _resolve_path(self, file_path: str, ctx: ToolContext) -> Path:
-        """Resolve a file path relative to the context."""
+        """Resolve a file path relative to the tool context's working directory.
+
+        Args:
+            file_path: The file path (absolute or relative).
+            ctx: The tool execution context.
+
+        Returns:
+            The resolved absolute :class:`pathlib.Path`.
+        """
         path = Path(file_path)
         if not path.is_absolute():
             path = ctx.working_dir / path

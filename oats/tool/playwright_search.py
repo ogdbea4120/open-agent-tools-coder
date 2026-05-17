@@ -3,8 +3,13 @@ Playwright-powered web search — no API keys required.
 
 Uses a headless Chromium browser to search Bing (primary) or
 DuckDuckGo (fallback) and extract real web results with titles,
-URLs, and snippets.  Registered alongside the existing WebSearchTool
-and wired as a fallback when no search API keys are configured.
+URLs, and snippets. Registered alongside :class:`WebSearchTool` and
+wired as a fallback when no search API keys are configured.
+
+Provides:
+
+- :class:`PlaywrightSearchTool` — Tool class for headless browser search.
+- :func:`playwright_search` — Low-level async function for browser-based search.
 """
 from __future__ import annotations
 
@@ -132,7 +137,18 @@ async def playwright_search(query: str, num_results: int = 5) -> list[dict[str, 
 # ── Tool class ───────────────────────────────────────────────────────
 
 class PlaywrightSearchTool(Tool):
-    """Search the web using a headless browser (no API keys needed)."""
+    """Search the web using a headless Chromium browser (no API keys needed).
+
+    Uses Playwright to launch a headless browser, search Bing (primary) or
+    DuckDuckGo (fallback), and extract real web results with titles, URLs,
+    and snippets. Registered alongside :class:`WebSearchTool` and wired as
+    a fallback when no search API keys are configured.
+
+    Example:
+        ::
+
+            playwright_search query="Python async best practices"
+    """
 
     @property
     def name(self) -> str:

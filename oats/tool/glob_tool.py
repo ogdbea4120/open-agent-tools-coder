@@ -1,5 +1,9 @@
 """
 Glob tool for finding files by pattern.
+
+Provides :class:`GlobTool` which finds files matching glob patterns,
+supporting both recursive (``**``) and non-recursive patterns. Results
+are sorted by modification time (newest first).
 """
 from __future__ import annotations
 
@@ -14,7 +18,18 @@ log = cl('tool.glob')
 
 
 class GlobTool(Tool):
-    """Find files matching a glob pattern."""
+    """Find files matching a glob pattern.
+
+    Supports both recursive (``**``) and non-recursive patterns.
+    Results are sorted by modification time (newest first) and
+    truncated to MAX_RESULTS (500).
+
+    Example:
+        ::
+
+            glob pattern="**/*.py"
+            glob pattern="*.ts" path="src/"
+    """
 
     MAX_RESULTS = 500
 
@@ -75,7 +90,16 @@ Results are sorted by modification time (newest first)."""
         }
 
     def _resolve_path(self, file_path: str | None, ctx: ToolContext) -> Path:
-        """Resolve a path relative to the context."""
+        """Resolve a path relative to the tool context's working directory.
+
+        Args:
+            file_path: The file path (absolute or relative), or ``None``.
+            ctx: The tool execution context.
+
+        Returns:
+            The resolved absolute :class:`pathlib.Path`, or the working
+            directory if ``file_path`` is ``None``.
+        """
         if file_path is None:
             return ctx.working_dir
         path = Path(file_path)

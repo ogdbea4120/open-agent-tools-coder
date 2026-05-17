@@ -1,8 +1,14 @@
 """
-README Generator Tool for the opencode platform.
+README Generator Tool for the OATS platform.
 
-This tool scans directories and generates README.md files that provide
-detailed overviews of the modules in each subdirectory.
+Provides :class:`GenerateREADMETool` which scans directories and generates
+README.md files that provide detailed overviews of the modules in each
+subdirectory, including module names, descriptions, key functions, and
+classes.
+
+Helper function:
+
+- :func:`register_generate_readme_tool` — Register the tool with the global registry.
 """
 
 from __future__ import annotations
@@ -18,7 +24,21 @@ log = cl('tool.readme')
 
 
 class GenerateREADMETool(Tool):
-    """Tool to generate README.md files with detailed module overviews in subdirectories."""
+    """Generate README.md files with detailed module overviews in subdirectories.
+
+    Scans each subdirectory and creates a README.md file that provides:
+
+    - A detailed overview of the modules in that subdirectory
+    - Module names and descriptions
+    - Key functions and classes
+    - Usage examples where applicable
+
+    Example:
+        ::
+
+            generate_readme
+            generate_readme path="./oats/cli"
+    """
 
     @property
     def name(self) -> str:

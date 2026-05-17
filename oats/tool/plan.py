@@ -1,5 +1,16 @@
 """
 Planning mode tools for creating implementation plans before execution.
+
+Provides three tools for the planning workflow:
+
+- :class:`PlanEnterTool` — Enter planning mode and create a plan file.
+- :class:`PlanExitTool` — Exit planning mode and request user approval.
+- :class:`PlanStatusTool` — Check the current planning mode status.
+
+Helper functions:
+
+- :func:`is_planning_mode` — Check if a session is in planning mode.
+- :func:`get_plan_state` — Get the full planning state for a session.
 """
 
 from __future__ import annotations
@@ -20,7 +31,17 @@ _plan_storage = KeyValueStorage("plans")
 
 
 class PlanEnterTool(Tool):
-    """Enter planning mode to create an implementation plan."""
+    """Enter planning mode to create an implementation plan.
+
+    Creates a skeleton plan file and stores the planning state in
+    session-scoped storage. While in planning mode, file-modifying
+    tools are blocked.
+
+    Example:
+        ::
+
+            plan_enter reason="Adding user authentication feature"
+    """
 
     @property
     def name(self) -> str:
@@ -164,7 +185,16 @@ When the plan is complete, use plan_exit to request approval.""",
 
 
 class PlanExitTool(Tool):
-    """Exit planning mode and request user approval for the plan."""
+    """Exit planning mode and request user approval for the plan.
+
+    Deactivates the planning state, allowing file-modifying tools to
+    resume. Presents the plan summary for user review.
+
+    Example:
+        ::
+
+            plan_exit summary="Plan to add auth: 3 steps, 4 files modified"
+    """
 
     @property
     def name(self) -> str:
@@ -275,7 +305,16 @@ The user will review the plan and can:
 
 
 class PlanStatusTool(Tool):
-    """Check the current planning mode status."""
+    """Check the current planning mode status for the session.
+
+    Returns whether the session is in planning mode, the plan file path,
+    the reason for entering planning mode, and any summary information.
+
+    Example:
+        ::
+
+            plan_status
+    """
 
     @property
     def name(self) -> str:

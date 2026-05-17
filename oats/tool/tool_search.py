@@ -1,5 +1,13 @@
 """
 Tool discovery tool for deferred loading of non-core tool schemas.
+
+Provides :class:`ToolSearchTool` which searches the tool catalog and returns
+callable schemas for matched tools. Supports exact-select queries (``select:``
+prefix) and fuzzy natural-language search.
+
+Helper functions:
+
+- :func:`_tokenize` — Split text into lowercase alphanumeric tokens for fuzzy matching.
 """
 from __future__ import annotations
 
@@ -28,7 +36,20 @@ def _tokenize(text: str) -> set[str]:
 
 
 class ToolSearchTool(Tool):
-    """Search the tool catalog and return callable schemas for matched tools."""
+    """Search the tool catalog and return callable schemas for matched tools.
+
+    Supports two query modes:
+
+    1. **Exact-select** — prefix with ``select:`` and comma-separated tool names
+    2. **Fuzzy search** — natural language query scored against tool names,
+       descriptions, aliases, and keywords
+
+    Example:
+        ::
+
+            tool_search query="select:deploy_app_with_docker_compose,get_app_logs"
+            tool_search query="deploy docker app"
+    """
 
     @property
     def name(self) -> str:

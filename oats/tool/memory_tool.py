@@ -1,5 +1,16 @@
 """
 Memory tools — read, write, and delete persistent memories.
+
+Provides three tools for managing persistent memories that survive across
+sessions:
+
+- :class:`MemoryReadTool` — List or search persistent memories.
+- :class:`MemoryWriteTool` — Create or update a persistent memory.
+- :class:`MemoryDeleteTool` — Delete a persistent memory by ID.
+
+Helper functions:
+
+- :func:`_get_manager` — Create a :class:`MemoryManager` from the tool context.
 """
 from __future__ import annotations
 
@@ -27,7 +38,18 @@ def _get_manager(ctx: ToolContext) -> MemoryManager:
 
 
 class MemoryReadTool(Tool):
-    """List and search persistent memories."""
+    """List or search persistent memories across sessions.
+
+    Memories contain user preferences, project context, feedback, and
+    references. Supports keyword search and type filtering.
+
+    Example:
+        ::
+
+            memory_read
+            memory_read query="authentication"
+            memory_read type_filter="project"
+    """
 
     @property
     def name(self) -> str:
@@ -112,7 +134,18 @@ class MemoryReadTool(Tool):
 
 
 class MemoryWriteTool(Tool):
-    """Create or update a persistent memory for future sessions."""
+    """Create or update a persistent memory for future sessions.
+
+    Supports four memory types: ``user`` (preferences/role), ``feedback``
+    (how to approach work), ``project`` (ongoing goals/decisions), and
+    ``reference`` (external resources). Scope can be ``project`` (local to
+    repo) or ``user`` (global).
+
+    Example:
+        ::
+
+            memory_write title="Preferred style" content="Use PEP 8" type="user"
+    """
 
     @property
     def name(self) -> str:
@@ -210,7 +243,16 @@ class MemoryWriteTool(Tool):
 
 
 class MemoryDeleteTool(Tool):
-    """Delete a persistent memory by its ID."""
+    """Delete a persistent memory by its ID (partial match accepted).
+
+    Searches all memories for an ID that starts with the given prefix
+    and deletes the first match.
+
+    Example:
+        ::
+
+            memory_delete memory_id="abc12345"
+    """
 
     @property
     def name(self) -> str:

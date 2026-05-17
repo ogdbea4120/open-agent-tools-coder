@@ -1,11 +1,17 @@
 """
 Edit tool for modifying existing files.
 
-Includes "smart edit" fallback strategies for models that struggle with exact
-string matching (e.g. Qwen2.5-Coder on local GPUs):
-  1. Exact match (primary path)
-  2. Fuzzy match – find closest matching block in the file (>80% confidence)
-  3. Write-swap – rebuild the entire file with the intended change applied
+Provides :class:`EditTool` which edits files by replacing text with smart
+fallback strategies for models that struggle with exact string matching:
+
+1. **Exact match** (primary path) — direct string replacement
+2. **Fuzzy match** — find closest matching block in the file (>80% confidence)
+3. **Write-swap** — rebuild the entire file with the intended change applied
+
+Helper functions:
+
+- :func:`_fuzzy_find_best_match` — Find the best fuzzy match for a target string.
+- :func:`_apply_write_swap` — Last-resort strategy to rebuild the file.
 """
 from __future__ import annotations
 
@@ -131,7 +137,22 @@ def _apply_write_swap(content: str, old_string: str, new_string: str) -> str | N
 
 
 class EditTool(Tool):
-    """Edit files by replacing text."""
+    """Edit files by replacing exact text with fallback strategies.
+
+    Primary strategy is exact string matching. If that fails, two fallback
+    strategies are tried:
+
+    1. **Fuzzy match** — finds the closest matching block (>80% similarity)
+    2. **Write-swap** — rebuilds the file with the best available replacement
+
+    This makes the tool robust against minor indentation or whitespace
+    differences that can occur when LLMs generate ``old_string`` values.
+
+    Example:
+        ::
+
+            edit file_path="src/main.py" old_string="def old():" new_string="def new():"
+    """
 
     @property
     def name(self) -> str:
@@ -190,12 +211,28 @@ Use replace_all=true to replace all occurrences."""
         }
 
     def requires_permission(self, args: dict[str, Any], ctx: ToolContext) -> str | None:
-        """Edit operations require permission."""
+        """Edit operations always require user permission.
+
+        Args:
+            args: The tool arguments containing the ``file_path``.
+            ctx: The tool execution context.
+
+        Returns:
+            A permission prompt string describing the file to be edited.
+        """
         file_path = args.get("file_path", "")
         return f"Edit file: {file_path}"
 
     def _resolve_path(self, file_path: str, ctx: ToolContext) -> Path:
-        """Resolve a file path relative to the context."""
+        """Resolve a file path relative to the tool context's working directory.
+
+        Args:
+            file_path: The file path (absolute or relative).
+            ctx: The tool execution context.
+
+        Returns:
+            The resolved absolute :class:`pathlib.Path`.
+        """
         path = Path(file_path)
         if not path.is_absolute():
             path = ctx.working_dir / path

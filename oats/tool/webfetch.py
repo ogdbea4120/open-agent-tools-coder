@@ -1,5 +1,9 @@
 """
 WebFetch tool for fetching and processing web content.
+
+Provides :class:`WebFetchTool` which fetches content from URLs and converts
+HTML to simplified plain text/markdown. Content is truncated if it exceeds
+the maximum length.
 """
 
 from __future__ import annotations
@@ -16,7 +20,17 @@ log = cl('tool.webfetch')
 
 
 class WebFetchTool(Tool):
-    """Fetch and process web content."""
+    """Fetch content from a URL and convert it to plain text/markdown.
+
+    Validates the URL, fetches the content via HTTP, and converts HTML
+    to simplified text. Content is truncated if it exceeds the maximum
+    length (100KB).
+
+    Example:
+        ::
+
+            webfetch url="https://docs.python.org/3/library/asyncio.html"
+    """
 
     MAX_CONTENT_LENGTH = 100000
     TIMEOUT = 30

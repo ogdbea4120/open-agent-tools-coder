@@ -1,5 +1,9 @@
 """
-Write tool for creating/overwriting files.
+Write tool for creating and overwriting files.
+
+Provides :class:`WriteTool` which writes content to files, creating parent
+directories as needed. Optionally syncs with the LSP server for diagnostics
+if the feature is enabled.
 """
 from __future__ import annotations
 
@@ -16,7 +20,16 @@ log = cl('tool.write')
 
 
 class WriteTool(Tool):
-    """Write content to a file."""
+    """Write content to a file, creating it or overwriting if it exists.
+
+    Creates parent directories as needed. Optionally syncs with the LSP
+    server for diagnostics if the feature is enabled.
+
+    Example:
+        ::
+
+            write file_path="src/new_module.py" content="def hello(): ..."
+    """
 
     @property
     def name(self) -> str:
@@ -70,12 +83,28 @@ Use the 'edit' tool for making changes to existing files."""
         }
 
     def requires_permission(self, args: dict[str, Any], ctx: ToolContext) -> str | None:
-        """Write operations require permission."""
+        """Write operations always require user permission.
+
+        Args:
+            args: The tool arguments containing the ``file_path``.
+            ctx: The tool execution context.
+
+        Returns:
+            A permission prompt string describing the file to be written.
+        """
         file_path = args.get("file_path", "")
         return f"Write file: {file_path}"
 
     def _resolve_path(self, file_path: str, ctx: ToolContext) -> Path:
-        """Resolve a file path relative to the context."""
+        """Resolve a file path relative to the tool context's working directory.
+
+        Args:
+            file_path: The file path (absolute or relative).
+            ctx: The tool execution context.
+
+        Returns:
+            The resolved absolute :class:`pathlib.Path`.
+        """
         path = Path(file_path)
         if not path.is_absolute():
             path = ctx.working_dir / path

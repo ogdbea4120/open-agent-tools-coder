@@ -1,5 +1,9 @@
 """
 LSP-backed code intelligence tool.
+
+Provides :class:`LSPTool` which queries a local Language Server Protocol
+server for code intelligence operations including go-to-definition,
+find-references, hover information, diagnostics, and symbol search.
 """
 from __future__ import annotations
 
@@ -22,7 +26,18 @@ log = cl('tool.lsp')
 
 
 class LSPTool(Tool):
-    """Query a local language server for code intelligence."""
+    """Query a local Language Server Protocol (LSP) server for code intelligence.
+
+    Supports operations such as go-to-definition, find-references, hover
+    information, diagnostics, and symbol search. Automatically detects the
+    appropriate language server for the file type.
+
+    Example:
+        ::
+
+            lsp operation="definition" file_path="src/main.py" line=10 column=5
+            lsp operation="workspace_symbols" query="MyClass"
+    """
 
     @property
     def name(self) -> str:
@@ -100,10 +115,16 @@ Requires an appropriate language server installed locally for the file type.
         }
 
     def is_concurrency_safe(self, args: dict[str, Any] | None = None) -> bool:
+        """LSP queries are read-only and safe to run concurrently.
+
+        Returns:
+            ``True`` — LSP operations do not modify files.
+        """
         return True
 
     @property
     def strict(self) -> bool:
+        """Enforce strict parameter validation for LSP operations."""
         return True
 
     async def execute(self, args: dict[str, Any], ctx: ToolContext) -> ToolResult:

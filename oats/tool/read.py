@@ -1,5 +1,9 @@
 """
 Read tool for reading file contents.
+
+Provides :class:`ReadTool` which reads files with line numbers, supports
+offset and limit parameters for reading portions of large files, and
+truncates long lines for readability.
 """
 from __future__ import annotations
 
@@ -14,7 +18,18 @@ log = cl('tool.read')
 
 
 class ReadTool(Tool):
-    """Read file contents."""
+    """Read the contents of a file with line numbers.
+
+    Supports reading full files or specific ranges via offset and limit
+    parameters. Long lines are truncated for readability. Binary files
+    are detected and rejected.
+
+    Example:
+        ::
+
+            read file_path="src/main.py"
+            read file_path="large_file.txt" offset=100 limit=50
+    """
 
     MAX_LINES = 2000
     MAX_LINE_LENGTH = 2000
@@ -81,7 +96,16 @@ For large files, use offset and limit parameters."""
         }
 
     def requires_permission(self, args: dict[str, Any], ctx: ToolContext) -> str | None:
-        """Read operations are generally allowed."""
+        """Read operations are generally allowed but require permission outside the project.
+
+        Args:
+            args: The tool arguments containing the ``file_path``.
+            ctx: The tool execution context.
+
+        Returns:
+            A permission prompt string if reading outside the project directory,
+            otherwise ``None``.
+        """
         file_path = args.get("file_path", "")
         # Check if reading outside project directory
         try:
@@ -93,7 +117,15 @@ For large files, use offset and limit parameters."""
         return None
 
     def _resolve_path(self, file_path: str, ctx: ToolContext) -> Path:
-        """Resolve a file path relative to the context."""
+        """Resolve a file path relative to the tool context's working directory.
+
+        Args:
+            file_path: The file path (absolute or relative).
+            ctx: The tool execution context.
+
+        Returns:
+            The resolved absolute :class:`pathlib.Path`.
+        """
         path = Path(file_path)
         if not path.is_absolute():
             path = ctx.working_dir / path

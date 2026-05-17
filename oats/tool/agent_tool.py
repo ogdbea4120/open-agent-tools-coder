@@ -3,6 +3,18 @@ Sub-agent tool — spawns independent child agents with their own sessions.
 
 Allows the LLM to delegate complex, multi-step tasks to specialized
 sub-agents that run their own tool loops.
+
+Provides two tools:
+
+- :class:`AgentTool` — Spawn a sub-agent to handle a complex task autonomously.
+- :class:`AgentStatusTool` — Check the status of a background sub-agent.
+
+Agent types control tool access:
+
+- ``general`` — all tools (default)
+- ``explore`` — read-only (read, glob, grep, bash, webfetch, websearch)
+- ``plan`` — planning tools (read, glob, grep, plan tools, todowrite)
+- ``verify`` — verification (read, glob, grep, bash)
 """
 from __future__ import annotations
 
@@ -412,7 +424,16 @@ class AgentTool(Tool):
 
 
 class AgentStatusTool(Tool):
-    """Check the status of a background sub-agent."""
+    """Check the status and results of a background sub-agent.
+
+    Looks up the agent by ID in the background results cache. If the agent
+    has completed, returns its result. If still running, reports status.
+
+    Example:
+        ::
+
+            agent_status agent_id="abc123"
+    """
 
     @property
     def name(self) -> str:

@@ -1,5 +1,9 @@
 """
-Grep tool for searching file contents.
+Grep tool for searching file contents with regex patterns.
+
+Provides :class:`GrepTool` which searches for patterns in files using
+ripgrep (if available) or Python regex as a fallback. Supports file type
+filtering, context lines, and multiple output modes.
 """
 from __future__ import annotations
 
@@ -16,7 +20,18 @@ log = cl('tool.grep')
 
 
 class GrepTool(Tool):
-    """Search for patterns in files."""
+    """Search for regex patterns in file contents.
+
+    Uses ripgrep if available, otherwise falls back to Python regex.
+    Supports file type filtering, context lines, and multiple output
+    modes (content, files, count).
+
+    Example:
+        ::
+
+            grep pattern="def .*\\(self" path="src/"
+            grep pattern="TODO" glob="*.py" output_mode="files"
+    """
 
     MAX_RESULTS = 200
     MAX_CONTEXT_LINES = 5
@@ -104,7 +119,16 @@ Supports:
         }
 
     def _resolve_path(self, file_path: str | None, ctx: ToolContext) -> Path:
-        """Resolve a path relative to the context."""
+        """Resolve a path relative to the tool context's working directory.
+
+        Args:
+            file_path: The file path (absolute or relative), or ``None``.
+            ctx: The tool execution context.
+
+        Returns:
+            The resolved absolute :class:`pathlib.Path`, or the working
+            directory if ``file_path`` is ``None``.
+        """
         if file_path is None:
             return ctx.working_dir
         path = Path(file_path)

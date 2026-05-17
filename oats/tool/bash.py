@@ -1,5 +1,10 @@
 """
 Bash tool for executing shell commands.
+
+Provides :class:`BashTool` which runs shell commands in a subprocess with
+configurable timeout and working directory. Output is captured and truncated
+if it exceeds configured limits. AWS commands are automatically classified
+and redacted for safety via :mod:`oats.tool.aws_safety`.
 """
 from __future__ import annotations
 
@@ -13,7 +18,18 @@ from oats.log import cl
 log = cl('tool.bash')
 
 class BashTool(Tool):
-    """Execute bash commands."""
+    """Execute shell commands in a subprocess.
+
+    Runs bash commands with configurable timeout and working directory.
+    Output is captured and truncated if it exceeds configured limits.
+    AWS commands are automatically classified and redacted for safety.
+
+    Example:
+        ::
+
+            bash command="pip install requests"
+            bash command="pytest tests/" timeout=60
+    """
 
     MAX_OUTPUT_LINES = 5000
     MAX_OUTPUT_BYTES = 1000000000
@@ -85,7 +101,15 @@ Do NOT use bash for:
         }
 
     def requires_permission(self, args: dict[str, Any], ctx: ToolContext) -> str | None:
-        """Bash commands always require permission by default."""
+        """Bash commands always require user permission before execution.
+
+        Args:
+            args: The tool arguments containing the ``command``.
+            ctx: The tool execution context.
+
+        Returns:
+            A permission prompt string describing the command to be executed.
+        """
         command = args.get("command", "")
         return f"Execute command: {command[:100]}{'...' if len(command) > 100 else ''}"
 

@@ -1,5 +1,9 @@
 """
 WebSearch tool for searching the web.
+
+Provides :class:`WebSearchTool` which searches the web using multiple
+backends in priority order: SerpAPI, Brave, Tavily, Playwright/DuckDuckGo,
+and DuckDuckGo instant answer API.
 """
 
 from __future__ import annotations
@@ -14,7 +18,18 @@ log = cl('tool.websearch')
 
 
 class WebSearchTool(Tool):
-    """Search the web for information."""
+    """Search the web for information using multiple backends.
+
+    Tries backends in priority order: SerpAPI, Brave, Tavily,
+    Playwright/DuckDuckGo, and DuckDuckGo instant answer API.
+    The first available backend (based on API key configuration) is used.
+
+    Example:
+        ::
+
+            websearch query="Python async best practices"
+            websearch query="sphinx documentation" num_results=3
+    """
 
     TIMEOUT = 30
     MAX_RESULTS = 10

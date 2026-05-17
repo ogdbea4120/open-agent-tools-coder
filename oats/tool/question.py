@@ -1,5 +1,13 @@
 """
 Question tool for asking the user questions during execution.
+
+Provides two tools for user interaction:
+
+- :class:`QuestionTool` — Ask one or more structured questions with options.
+- :class:`AskUserTool` — Ask a single simple yes/no or choice question.
+
+Both tools publish events to the event bus so the UI can display questions
+and collect responses.
 """
 
 from __future__ import annotations
@@ -14,7 +22,19 @@ log = cl('tool.question')
 
 
 class QuestionTool(Tool):
-    """Ask the user a question and get their response."""
+    """Ask the user one or more questions and get their response.
+
+    Publishes questions to the event bus so the UI can display them.
+    Supports multiple-choice questions with optional multi-select.
+    In CLI mode, questions are formatted for terminal display.
+
+    Example:
+        ::
+
+            question questions=[{"question": "Which approach?", "header": "Approach",
+                         "options": [{"label": "A", "description": "Option A"},
+                                     {"label": "B", "description": "Option B"}]}]
+    """
 
     @property
     def name(self) -> str:
@@ -171,7 +191,18 @@ They can select from the provided options or type a custom response."""
 
 
 class AskUserTool(Tool):
-    """Simplified tool for asking a single yes/no or choice question."""
+    """Simplified tool for asking a single yes/no or choice question.
+
+    Publishes a PERMISSION_REQUEST event to the event bus so the UI can
+    display the question and collect a response. Supports optional
+    multiple-choice options and a default value.
+
+    Example:
+        ::
+
+            ask_user question="Should I proceed with the deletion?"
+            ask_user question="Which color?" options=["red", "blue", "green"]
+    """
 
     @property
     def name(self) -> str:

@@ -1,5 +1,19 @@
 """
-Tool registry and base definitions.
+Tool registry and base definitions for the OATS agent framework.
+
+This module provides the core abstractions for tool registration and execution:
+
+- :class:`Tool` — Abstract base class that all tools inherit from.
+- :class:`ToolContext` — Context object passed to every tool execution.
+- :class:`ToolResult` — Result object returned by tools after execution.
+- :class:`ToolRegistry` — Central registry for discovering and managing tools.
+
+Module-level convenience functions:
+
+- :func:`get_tool_registry` — Get the singleton registry instance.
+- :func:`register_tool` — Register a tool in the global registry.
+- :func:`get_tool` — Look up a tool by name or alias.
+- :func:`list_tools` — List all registered tools.
 """
 
 from __future__ import annotations

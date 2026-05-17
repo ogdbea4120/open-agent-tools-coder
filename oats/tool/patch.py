@@ -1,5 +1,13 @@
 """
 ApplyPatch tool for applying unified diff patches.
+
+Provides :class:`ApplyPatchTool` which applies standard unified diff format
+patches (like output from ``git diff`` or ``diff -u``) to one or more files.
+
+Data classes:
+
+- :class:`PatchHunk` — A single hunk from a unified diff patch.
+- :class:`FilePatch` — Patch metadata for a single file.
 """
 
 from __future__ import annotations
@@ -54,7 +62,18 @@ class FilePatch:
 
 
 class ApplyPatchTool(Tool):
-    """Apply a unified diff patch to files."""
+    """Apply a unified diff patch to one or more files.
+
+    Accepts standard unified diff format (like output from ``git diff``
+    or ``diff -u``). Supports multi-file patches, new files, and deleted
+    files. Hunks are applied in reverse order to maintain line number
+    integrity.
+
+    Example:
+        ::
+
+            apply_patch patch="--- a/file.py\n+++ b/file.py\n@@ -1,3 +1,4 @@\n old\n+new\n ..."
+    """
 
     @property
     def name(self) -> str:
@@ -115,7 +134,15 @@ Use this for complex multi-line changes or when you have a patch to apply."""
         }
 
     def requires_permission(self, args: dict[str, Any], ctx: ToolContext) -> str | None:
-        """Patches require permission."""
+        """Patch operations always require user permission.
+
+        Args:
+            args: The tool arguments containing the ``patch`` content.
+            ctx: The tool execution context.
+
+        Returns:
+            A permission prompt string describing the number of affected files.
+        """
         patch = args.get("patch", "")
         # Count affected files
         files = re.findall(r"^(?:---|\+\+\+) [ab]/(.+)$", patch, re.MULTILINE)
