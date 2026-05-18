@@ -29,7 +29,7 @@ def login_to_openwebui(
     Example
 
     ```python
-    base_address = os.getenv("CODER_CHAT_URL", "api3.obuild.ai")
+    base_address = os.getenv("CODER_CHAT_URL", "api.example.com")
     email = os.getenv("CODER_CHAT_EMAIL", "email@email.com")
     password = os.getenv("CODER_CHAT_PASSWORD", "123321")
     login_dict = login_to_openwebui(email, password)
