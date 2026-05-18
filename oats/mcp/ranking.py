@@ -10,8 +10,10 @@ Maintains a ranking of tools based on:
 The ranking is persisted as an MD file for transparency and debugging.
 
 References:
+
 - AutoTool: Efficient Tool Selection for LLM Agents (2024)
   CIPS = (1-alpha) * Scorefreq + alpha * Scorectx
+
 - Gorilla: LLM Connected with Massive APIs (NeurIPS 2024)
 """
 from __future__ import annotations

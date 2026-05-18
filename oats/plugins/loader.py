@@ -32,7 +32,7 @@ from typing import Any, Awaitable, Callable, Iterable
 
 from oats.core.features import _is_enabled
 from oats.core.profiles import is_feature_enabled
-from oats.hook.engine import HookEngine, HookEvent, HookHandler
+from oats.hook.engine import HookEngine, HookEvent, HookHandler, HookResult, HookContext
 from oats.log import cl
 from oats.plugins.manifest import PluginManifest, discover_manifests
 from oats.tool.registry import Tool, get_tool_registry

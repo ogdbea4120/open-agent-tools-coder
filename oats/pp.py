@@ -1,3 +1,5 @@
+"""Pretty-printing utilities for structured data."""
+
 from typing import Dict, Any
 import ujson as json
 

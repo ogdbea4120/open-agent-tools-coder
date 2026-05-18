@@ -9,6 +9,7 @@ Usage::
 
     from oats.git.coauthor import ensure_coauthor_trailer
     cmd = ensure_coauthor_trailer('git commit -m "fix bug"')
+
 """
 from __future__ import annotations
 

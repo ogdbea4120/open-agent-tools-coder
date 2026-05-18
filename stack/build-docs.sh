@@ -22,7 +22,9 @@ echo "==> Cleaning previous build..."
 rm -rf "$DOCS_DIR/_build"
 
 echo "==> Building documentation..."
-sphinx-build -b html "$DOCS_DIR" "$BUILD_DIR" 2>&1 | grep -E "(WARNING|ERROR|build succeeded)" || true
+vc="sphinx-build -v -b html \"${DOCS_DIR}\" \"${BUILD_DIR}\""
+echo "${vc}"
+eval "${vc}" 2>&1 | grep -E "(WARNING|ERROR|build succeeded)" || true
 
 echo ""
 echo "==> Build complete. Output: $BUILD_DIR"

@@ -8,21 +8,22 @@ Loads MCP server definitions from a JSON config file that can be placed in:
 
 Eventually this could be managed via a web app, but for now it's file-based.
 
-## Environment Variable API Key Resolution
+Environment Variable API Key Resolution
+---------------------------------------
 
 For security, API keys in header values can reference environment variables instead
-of containing plaintext tokens. The pattern is:
+of containing plaintext tokens. The pattern is::
 
     "headers": {
         "Authorization": "Bearer MCP_SERVER_API_KEY_PYTHON_SOFTWARE_ENGINEER"
     }
 
 At load time, the config resolver detects values matching the pattern
-`Bearer MCP_SERVER_API_KEY_<SERVER_NAME>` and replaces them with the actual
+``Bearer MCP_SERVER_API_KEY_<SERVER_NAME>`` and replaces them with the actual
 environment variable value. The env var name is derived from the server name:
 
-    Server: python_software_engineer
-    Env var: MCP_SERVER_API_KEY_PYTHON_SOFTWARE_ENGINEER
+    - Server: python_software_engineer
+    - Env var: MCP_SERVER_API_KEY_PYTHON_SOFTWARE_ENGINEER
 
 If the env var is not set, a warning is logged and the original value is retained
 (backward compatibility).

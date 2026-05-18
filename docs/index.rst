@@ -271,22 +271,22 @@ Confirm the ``providers`` show up as expected:
 Start the OATs Coder
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: bash
+.. code-block:: text
 
    $ oat
-   Let's build together!! 🤗 🤖 🔨 🔧
+   Lets build together!!
    Starting up oats coder please wait...
    If you hit an error, please open an issue so we can help fix it:
    github.com/district-solutions/open-agent-tools-coder/issues
 
-     coder v1.2.0  ·  chat:latest  ·  vllm-small
+     coder v1.2.0  .  chat:latest  .  vllm-small
      /opt/ds/oats
-     ──────────────────────────────────────────────────
-     Enter to send · Alt+Enter for newline · /help for commands
+     ------------------------------------------------
+     Enter to send . Alt+Enter for newline . /help for commands
 
-     mode: edit — edit — supervised, ask before writes. Switch with /edit /auto /plan /caveman
+     mode: edit - edit - supervised, ask before writes. Switch with /edit /auto /plan /caveman
 
-   ❯
+   >
 
 Local AI - vLLM Validation - OATs Config File
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -5,10 +5,10 @@ Manages discovery, registration, and health checking of MCP servers.
 This is the central authority for knowing what tools are available
 across all connected MCP servers.
 
-Key design: LiteLLM (and similar) uses per-function MCP endpoints:
-  GET  /{mcp_function_name}/tools/list
-  POST /{mcp_function_name}/tools/call
-NOT a single /mcp-rest/tools/call for everything.
+Key design: LiteLLM (and similar) uses per-function MCP endpoints
+(e.g. ``GET /{mcp_function_name}/tools/list`` and
+``POST /{mcp_function_name}/tools/call``), not a single
+``/mcp-rest/tools/call`` for everything.
 
 The registry discovers available MCP function names, then probes each
 one for its tools, and stores the correct call_endpoint per tool.

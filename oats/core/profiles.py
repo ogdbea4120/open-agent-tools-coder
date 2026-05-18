@@ -5,14 +5,15 @@ Profiles let you run coder as slim and lightweight or as fully featured.
 Set via CODER_PROFILE env var or programmatically.
 
 Built-in profiles:
-    minimal   — Core file/code tools only. No network, no browser, no cloud.
-                Ideal for air-gapped devices, embedded, or CI runners.
-    standard  — Adds web search, S3, planning, memory, agents.
-                Good default for most dev workstations.
-    full      — Everything enabled: browser/playwright, MCP, LSP, scraping
-    custom    — User controls each feature group via individual env vars.
 
-Individual feature groups can always be overridden regardless of profile:
+    - **minimal** — Core file/code tools only. No network, no browser, no cloud.
+      Ideal for air-gapped devices, embedded, or CI runners.
+    - **standard** — Adds web search, S3, planning, memory, agents.
+      Good default for most dev workstations.
+    - **full** — Everything enabled: browser/playwright, MCP, LSP, scraping
+    - **custom** — User controls each feature group via individual env vars.
+
+Individual feature groups can always be overridden regardless of profile::
 
     CODER_FEATURE_BROWSER=0    disables browser even on 'full'
 """

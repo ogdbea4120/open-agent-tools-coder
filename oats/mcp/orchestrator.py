@@ -14,24 +14,26 @@ This is the core of the MCP tool calling protocol. It coordinates:
 - Idempotency keys for safe retries
 - MD file tracking of all calls
 
-Architecture:
-                    ┌─────────────┐
-                    │ Orchestrator│ (Hub)
-                    │   (Router)  │
-                    └──────┬──────┘
-                           │
-        ┌──────────┬───────┼───────┬──────────┐
-        ▼          ▼       ▼       ▼          ▼
-   ┌─────────┐ ┌──────┐ ┌─────┐ ┌──────┐ ┌───────┐
-   │ MCP Srv │ │ MCP  │ │ MCP │ │ MCP  │ │  MCP  │ (Spokes)
-   │    A    │ │  B   │ │  C  │ │  D   │ │  ...  │
-   └─────────┘ └──────┘ └─────┘ └──────┘ └───────┘
+Architecture::
+
+#                    ┌─────────────┐
+#                    │ Orchestrator│ (Hub)
+#                    │   (Router)  │
+#                    └──────┬──────┘
+#                           │
+#        ┌──────────┬───────┼───────┬──────────┐
+#        ▼          ▼       ▼       ▼          ▼
+#   ┌─────────┐ ┌──────┐ ┌─────┐ ┌──────┐ ┌───────┐
+#   │ MCP Srv │ │ MCP  │ │ MCP │ │ MCP  │ │  MCP  │ (Spokes)
+#   │    A    │ │  B   │ │  C  │ │  D   │ │  ...  │
+#   └─────────┘ └──────┘ └─────┘ └──────┘ └───────┘
 
 References:
 - Netflix Hystrix (circuit breaker + bulkhead)
 - LangGraph (error edges, checkpoint recovery)
 - AutoTool (tool inertia, sequential patterns)
 """
+
 from __future__ import annotations
 
 import asyncio

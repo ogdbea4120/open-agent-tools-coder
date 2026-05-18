@@ -51,6 +51,24 @@ autodoc_default_options = {
 autodoc_typehints = "signature"
 autodoc_typehints_format = "short"
 
+# -- Type aliases for forward references ------------------------------------
+autodoc_type_aliases = {
+    "JsonValue": "JsonValue",
+    # "HookContext": "HookContext",
+}
+
+# -- Nitpick: ignore types we can't resolve ----------------------------------
+nitpick_ignore = [
+    ("py:class", "JsonValue"),
+    # ("py:class", "HookContext"),
+    # ("py:class", "HookResult"),
+    ("py:class", "type"),
+]
+
+# -- sphinx_autodoc_typehints settings --------------------------------------
+# Suppress warnings for pydantic internal types that can't be resolved
+always_document_param_types = False
+
 # -- Intersphinx -------------------------------------------------------------
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),

@@ -92,14 +92,14 @@ def classify_error(error: str, status_code: int | None = None) -> ErrorCategory:
 # ---------------------------------------------------------------------------
 
 class CircuitBreaker:
-    """
-    Per-server circuit breaker following the Hystrix pattern.
+    """Per-server circuit breaker following the Hystrix pattern.
 
     States:
-    - CLOSED: Normal. Count failures in a sliding window.
-    - OPEN: Blocking all calls. Cooldown timer running.
-    - HALF_OPEN: After cooldown, allow one probe request.
-              If probe succeeds -> CLOSED. If fails -> OPEN with longer cooldown.
+
+    - **CLOSED**: Normal. Count failures in a sliding window.
+    - **OPEN**: Blocking all calls. Cooldown timer running.
+    - **HALF_OPEN**: After cooldown, allow one probe request.
+      If probe succeeds -> CLOSED. If fails -> OPEN with longer cooldown.
 
     This replaces the simple StuckDetector. Key improvement: tools automatically
     RECOVER after a cooldown, instead of staying stuck forever.

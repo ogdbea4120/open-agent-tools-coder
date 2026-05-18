@@ -22,13 +22,21 @@ from typing import Any
 import numpy as np
 
 from oats.log import cl
-from oats.skills.find_best_skills_based_on_user_string_request1 import (
-    _resolve_skills_path,
-    build_bm25_index,
-    enhance_user_input,
-    get_skill_descriptions,
-    load_skills_menu,
-)
+
+try:
+    from oats.skills.find_best_skills_based_on_user_string_request1 import (
+        _resolve_skills_path,
+        build_bm25_index,
+        enhance_user_input,
+        get_skill_descriptions,
+        load_skills_menu,
+    )
+except ImportError:
+    _resolve_skills_path = None  # type: ignore
+    build_bm25_index = None  # type: ignore
+    enhance_user_input = None  # type: ignore
+    get_skill_descriptions = None  # type: ignore
+    load_skills_menu = None  # type: ignore
 
 log = cl("coder.skill_selector")
 

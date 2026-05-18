@@ -87,10 +87,10 @@ def select_tools_for_prompt(
     project_dir: str = None,
     verbose: bool = False,
 ) -> SelectedToolsManifest:
-    """
-    Select the most relevant tools for a user prompt.
+    """Select the most relevant tools for a user prompt.
 
     Strategy:
+
     1. Always include core tools (read, write, edit, bash, etc.)
     2. Check the BM25 index — if there's a match above threshold,
        the user wants an MCP resource (even if they didn't say "mcp")

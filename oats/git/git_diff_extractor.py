@@ -15,7 +15,11 @@ from git import Repo
 from datetime import datetime
 from typing import List, Dict, Any
 from oats.log import cl
-from oats.api_req1 import AgentReq
+
+try:
+    from oats.api_req1 import AgentReq
+except ImportError:
+    AgentReq = None  # type: ignore
 
 log = cl('git_diff_extractor')
 

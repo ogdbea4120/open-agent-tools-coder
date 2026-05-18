@@ -32,7 +32,7 @@ class PatchHunk:
         old_count: Number of lines in the original file for this hunk.
         new_start: Starting line number in the new file (1-based).
         new_count: Number of lines in the new file for this hunk.
-        lines: The hunk body lines (prefixed with ``+``, ``-``, or `` ``).
+        lines: The hunk body lines (prefixed with ``+``, ``-``, or space).
     """
 
     old_start: int
@@ -70,9 +70,8 @@ class ApplyPatchTool(Tool):
     integrity.
 
     Example:
-        ::
 
-            apply_patch patch="--- a/file.py\n+++ b/file.py\n@@ -1,3 +1,4 @@\n old\n+new\n ..."
+        Call ``apply_patch`` with a unified diff patch string as the ``patch`` argument.
     """
 
     @property

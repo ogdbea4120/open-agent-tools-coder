@@ -5,26 +5,36 @@ On first boot (or when stale), fetches OpenAPI specs from all configured
 MCP servers, extracts every endpoint/tool, and builds a searchable BM25
 index. This index is persisted to disk so subsequent startups are instant.
 
-The index supports:
-- `gg run -m 'search businesswire for investing news'`
-  → classifier detects "search businesswire" → reranks MCP tools →
-  → auto-selects `litellm.search_investing_businesswire_...` → calls it
+The index supports queries like::
 
-- `gg mcp search "investing"` (future CLI command)
-  → searches the index directly
+    gg run -m 'search businesswire for investing news'
 
-Architecture:
-    Startup:
-    1. Load mcp_servers.json
-    2. For each server: fetch /openapi.json
-    3. Extract all paths/operations → IndexEntry objects
-    4. Build BM25 corpus from names + descriptions + tags
-    5. Persist index to .coder/mcp_index.json
+Which will:
 
-    Runtime:
-    1. Load index from disk (fast, no network)
-    2. User prompt → BM25 query → ranked results
-    3. Top result has call_endpoint, mcp_function_name → ready to call
+- Classifier detects "search businesswire"
+- Reranks MCP tools
+- Auto-selects the matching tool and calls it
+
+Or directly search the index::
+
+    gg mcp search "investing"
+
+Architecture
+------------
+
+Startup:
+
+1. Load mcp_servers.json
+2. For each server: fetch /openapi.json
+3. Extract all paths/operations into IndexEntry objects
+4. Build BM25 corpus from names, descriptions, and tags
+5. Persist index to .coder/mcp_index.json
+
+Runtime:
+
+1. Load index from disk (fast, no network)
+2. User prompt into BM25 query into ranked results
+3. Top result has call_endpoint and mcp_function_name, ready to call
 """
 from __future__ import annotations
 

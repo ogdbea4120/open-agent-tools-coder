@@ -1,24 +1,26 @@
 """
 Hook engine — executes user-defined commands at lifecycle events.
 
-Hooks are configured in coder.json:
-{
-  "hooks": [
-    {
-      "event": "pre_tool_use",
-      "matcher": "bash",
-      "command": "/path/to/script.sh",
-      "timeout": 30
-    }
-  ]
-}
+Hooks are configured in coder.json::
 
-Hook commands receive a JSON context on stdin and must return JSON on stdout:
-{
-  "action": "continue",   // "continue" | "block" | "modify"
-  "modified_args": {...},  // only for "modify" action on pre_tool_use
-  "message": "..."         // optional message to inject
-}
+    {
+      "hooks": [
+        {
+          "event": "pre_tool_use",
+          "matcher": "bash",
+          "command": "/path/to/script.sh",
+          "timeout": 30
+        }
+      ]
+    }
+
+Hook commands receive a JSON context on stdin and must return JSON on stdout::
+
+    {
+      "action": "continue",
+      "modified_args": {},
+      "message": "..."
+    }
 """
 from __future__ import annotations
 

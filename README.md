@@ -47,6 +47,9 @@ Here is a recording showing how to install and get started quickly:
 
 [![Getting Started with Open Agent Tools Agentic Coder - Install, Chats and Tool-Calling with Qwen36 27B and FunctionGemma using vLLM](https://asciinema.org/a/3ZhMCyUKjr2dmIH1.svg)](https://asciinema.org/a/3ZhMCyUKjr2dmIH1)
 
+If you hit issues please let us know! We're on the [Open Agent Tools discord](https://discord.gg/VsyAJzYEM)
+
+
 ```
 git clone https://github.com/district-solutions/open-agent-tools-coder oats
 cd oats

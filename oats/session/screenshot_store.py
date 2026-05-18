@@ -1,15 +1,16 @@
 """
 Session-scoped screenshot storage.
 
-Screenshots are saved under the coder data directory at:
-    {data_dir}/screenshots/{session_id}/
+Screenshots are saved under the coder data directory at
+``{data_dir}/screenshots/{session_id}/``.
 
 Each image is named with a timestamp and optional label.
 The store provides helpers to:
-  - save a screenshot from raw bytes or a local file
-  - list screenshots for the current session
-  - clean up all screenshots for a session (called on session delete)
-  - encode a screenshot as a base64 image dict ready for the vision pipeline
+
+- save a screenshot from raw bytes or a local file
+- list screenshots for the current session
+- clean up all screenshots for a session (called on session delete)
+- encode a screenshot as a base64 image dict ready for the vision pipeline
 """
 from __future__ import annotations
 
