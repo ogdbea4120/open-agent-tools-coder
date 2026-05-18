@@ -5,7 +5,7 @@ Coder Session Models
 """
 
 from typing import Dict, Optional, Any
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from pydantic.config import ConfigDict
 from oats.tool.registry import Tool
 from oats.call_tool_with_loader1 import LocalTool
@@ -43,35 +43,32 @@ class SelectedToolsManifest(BaseModel):
         all_tools_dict: Dict of all tools by name.
         provider_tool_map: Mapping of providers to their tools.
     """
-
-    prompt: str = None
+    prompt: str | None = None
     found_best_tool: bool = False
-    found_all_tools: list = []
-    core_tools: list[Tool] = []
-    core_tool_names: set[str] = set()
-    core_impls: Dict = {}
-    mcp_tools: list[Tool] = []
-    mcp_tool_names: set[str] = set()
-    mcp_impls: Dict = {}
-    local_tools: list[LocalTool] = []
-    local_tool_names: set[str] = set()
-    local_impls: Dict = {}
-    all_tools: list[Tool] = []
-    all_tool_names: set[str] = set()
-    plan_tools: list[Tool] = []
-    plan_tool_names: set[str] = set()
-    agent_tools: list[Tool] = []
-    agent_tool_names: set[str] = set()
-    best_tools: Dict = {}
-    best_tool_names: set[str] = set()
-    best_files: list = []
-    best_impls: Dict = {}
-    all_tools_dict: Dict = {}
-    provider_tool_map: Dict = {}
+    found_all_tools: list = Field(default_factory=list)
+    core_tools: list[Tool] = Field(default_factory=list)
+    core_tool_names: set[str] = Field(default_factory=set)
+    core_impls: dict[str, Any] = Field(default_factory=dict)
+    mcp_tools: list[Tool] = Field(default_factory=list)
+    mcp_tool_names: set[str] = Field(default_factory=set)
+    mcp_impls: dict[str, Any] = Field(default_factory=dict)
+    local_tools: list[LocalTool] = Field(default_factory=list)
+    local_tool_names: set[str] = Field(default_factory=set)
+    local_impls: dict[str, Any] = Field(default_factory=dict)
+    all_tools: list[Tool] = Field(default_factory=list)
+    all_tool_names: set[str] = Field(default_factory=set)
+    plan_tools: list[Tool] = Field(default_factory=list)
+    plan_tool_names: set[str] = Field(default_factory=set)
+    agent_tools: list[Tool] = Field(default_factory=list)
+    agent_tool_names: set[str] = Field(default_factory=set)
+    best_tools: dict[str, Any] = Field(default_factory=dict)
+    best_tool_names: set[str] = Field(default_factory=set)
+    best_files: list[Any] = Field(default_factory=list)
+    best_impls: dict[str, Any] = Field(default_factory=dict)
+    all_tools_dict: dict[str, Any] = Field(default_factory=dict)
+    provider_tool_map: dict[str, Any] = Field(default_factory=dict)
 
     model_config = ConfigDict(
         arbitrary_types_allowed=True,
-        # Allow extra fields if needed
-        extra='allow'
+        extra="allow",
     )
-    __pydantic_extra__: dict[str, Any] = {}
