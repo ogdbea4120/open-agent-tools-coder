@@ -29,6 +29,7 @@ dependencies = [
     "boto3",
     "fastapi",
     "fastparquet",
+    "GitPython",
     "litellm==1.83.14",
     "prompt_toolkit",
     "pydantic",
