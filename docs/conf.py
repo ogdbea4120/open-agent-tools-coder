@@ -68,6 +68,9 @@ nitpick_ignore = [
 # -- sphinx_autodoc_typehints settings --------------------------------------
 # Suppress warnings for pydantic internal types that can't be resolved
 always_document_param_types = False
+suppress_warnings = [
+    "sphinx_autodoc_typehints.guarded_import",
+]
 
 # -- Intersphinx -------------------------------------------------------------
 intersphinx_mapping = {

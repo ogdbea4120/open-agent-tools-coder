@@ -223,6 +223,7 @@ class MCPIndex:
             "entry_count": len(self.entries),
             "entries": [e.to_dict() for e in self.entries],
         }
+
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "MCPIndex":
         """Deserialize an MCPIndex from a plain dict, rebuilding BM25 stats."""
