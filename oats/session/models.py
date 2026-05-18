@@ -4,7 +4,7 @@
 Coder Session Models
 """
 
-from typing import Dict, Optional
+from typing import Dict, Optional, Any
 from pydantic import BaseModel
 from pydantic.config import ConfigDict
 from oats.tool.registry import Tool
