@@ -74,4 +74,4 @@ class SelectedToolsManifest(BaseModel):
         # Allow extra fields if needed
         extra='allow'
     )
-    __pydantic_extra__: Dict[str, Any] | None = {}
+    __pydantic_extra__: dict[str, Any] = {}
