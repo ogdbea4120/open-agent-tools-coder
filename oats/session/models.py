@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
 """
-ff -m 'get utc' -n -p vllm-small -z hosted_vllm/MODEL_NAME
+Coder Session Models
 """
 
-from typing import Optional
+from typing import Dict, Optional
 from pydantic import BaseModel
 from pydantic.config import ConfigDict
 from oats.tool.registry import Tool
@@ -23,13 +23,13 @@ class SelectedToolsManifest(BaseModel):
         found_all_tools: List of all discovered tools.
         core_tools: Core built-in tools selected for this prompt.
         core_tool_names: Set of core tool names.
-        core_impls: dict mapping core tool names to implementations.
+        core_impls: Dict mapping core tool names to implementations.
         mcp_tools: MCP (Model Context Protocol) tools selected.
         mcp_tool_names: Set of MCP tool names.
-        mcp_impls: dict mapping MCP tool names to implementations.
+        mcp_impls: Dict mapping MCP tool names to implementations.
         local_tools: Local/external tools selected.
         local_tool_names: Set of local tool names.
-        local_impls: dict mapping local tool names to implementations.
+        local_impls: Dict mapping local tool names to implementations.
         all_tools: Union of all selected tools.
         all_tool_names: Set of all selected tool names.
         plan_tools: Tools relevant to planning mode.
@@ -39,8 +39,8 @@ class SelectedToolsManifest(BaseModel):
         best_tools: Best-match tools from BM25 scoring.
         best_tool_names: Set of best-match tool names.
         best_files: Files associated with best-match tools.
-        best_impls: dict mapping best tool names to implementations.
-        all_tools_dict: dict of all tools by name.
+        best_impls: Dict mapping best tool names to implementations.
+        all_tools_dict: Dict of all tools by name.
         provider_tool_map: Mapping of providers to their tools.
     """
 
@@ -49,25 +49,25 @@ class SelectedToolsManifest(BaseModel):
     found_all_tools: list = []
     core_tools: list[Tool] = []
     core_tool_names: set[str] = set()
-    core_impls: dict = {}
+    core_impls: Dict = {}
     mcp_tools: list[Tool] = []
     mcp_tool_names: set[str] = set()
-    mcp_impls: dict = {}
+    mcp_impls: Dict = {}
     local_tools: list[LocalTool] = []
     local_tool_names: set[str] = set()
-    local_impls: dict = {}
+    local_impls: Dict = {}
     all_tools: list[Tool] = []
     all_tool_names: set[str] = set()
     plan_tools: list[Tool] = []
     plan_tool_names: set[str] = set()
     agent_tools: list[Tool] = []
     agent_tool_names: set[str] = set()
-    best_tools: dict = {}
+    best_tools: Dict = {}
     best_tool_names: set[str] = set()
     best_files: list = []
-    best_impls: dict = {}
-    all_tools_dict: dict = {}
-    provider_tool_map: dict = {}
+    best_impls: Dict = {}
+    all_tools_dict: Dict = {}
+    provider_tool_map: Dict = {}
 
     model_config = ConfigDict(
         arbitrary_types_allowed=True,
