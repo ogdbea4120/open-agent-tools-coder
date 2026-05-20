@@ -1,6 +1,6 @@
 [project]
 name = "oats-coder"
-version = "1.0.14"
+version = "1.0.15"
 description = "Open Agent Tools (oats) enables small-to-large self-hosted ai models to use local source code when running tool-calling agentic workloads. We actively data mine 20,970+ (2+ TB) popular github repos using large and small ai models to create reuseable: json, markdown and parquet files for local-first tool-calling models."
 readme = "README.md"
 requires-python = ">=3.10"

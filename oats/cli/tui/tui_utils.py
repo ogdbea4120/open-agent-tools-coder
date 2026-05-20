@@ -49,7 +49,7 @@ def _print_tools(console: Console):
     console.print(f"\n  [dim]{len(tools)} tools loaded[/dim]")
     console.print()
 
-def _print_config(console: Console):
+def _print_config(console: Console, verbose: bool = False):
     """Print active configuration."""
     from oats.core.config import get_config
     cfg = get_config()
@@ -66,7 +66,9 @@ def _print_config(console: Console):
         console.print(f"  [bold cyan]providers[/bold cyan]")
         for name, prov in cfg.provider.items():
             url = prov.base_url or ""
-            key = "***" + prov.api_key[-4:] if prov.api_key and len(prov.api_key) > 4 else prov.api_key or ""
+            key = "******"
+            if verbose:
+                key = "***" + prov.api_key[-4:] if prov.api_key and len(prov.api_key) > 4 else prov.api_key or ""
             enabled = "[green]●[/green]" if prov.enabled else "[red]○[/red]"
             console.print(f"  {enabled} [cyan]{name:16}[/cyan] [dim]{url}[/dim]  [dim]{key}[/dim]")
 

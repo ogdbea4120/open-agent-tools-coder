@@ -81,8 +81,9 @@ def validate_coder_env(provider_id: str, model_id: str | None = None, verbose: b
                 log.info(err_msg)
                 raise Exception('Please fix the CODER_CONFIG_FILE for the logged error')
             else:
-                if model_node['name'] == model_id:
+                if model_id in model_node['name']:
                     found_model = True
+                    break
         if not found_model:
             err_msg = f'### Sorry!!💥 The CODER_CONFIG_FILE provider_id: ``{provider_id}`` does not have the model_id: ``{model_id}`` in the ``models`` list.\n\nPlease check the environment variable: ``CODER_CONFIG_FILE`` file is at that path and is a valid coder.json file like the ``oats/config/coder.json``\n\nHere is the ``coder.json`` config dictionary:\n```\n{pp(config_dict)}\n```\n\nHere is the path to the current config:\n```\nexport CODER_CONFIG_FILE={coder_config_file}\n```\n'
             log.info(err_msg)
