@@ -203,9 +203,6 @@ class OatConfig(BaseModel):
                                             use_func = comp_prompt
                                             use_desc = comp_desc
                                             break
-                                    # if src_file in ['coder/othink/start_test5.py']:
-                                    #     print(use_func)
-                                    #     print(use_desc)
                                     if use_func == '':
                                         use_func = list(best_uses[src_file].items())[0][0]
                                         use_desc = best_uses[src_file][use_func]

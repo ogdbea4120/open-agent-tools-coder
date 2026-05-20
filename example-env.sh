@@ -12,6 +12,8 @@ export CODER_CHAT_URL=
 export CODER_CHAT_PASSWORD=
 export CODER_CHAT_EMAIL=
 export CODER_NAME=
+# local s3 with a tasks1 bucket
+CODER_S3_BUCKET=tasks1
 # export CODER_CONFIG_FILE=/opt/ds/coder.json
 export CODER_CONFIG_FILE=
 # export CODER_TOOL_USES_INDEX=/opt/ds/oats/.ai/AGENT.repo_uses.python.tools.json

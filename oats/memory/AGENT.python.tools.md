@@ -1,7 +1,7 @@
 # Agent Python Tools
 
 - repo: oats
-- repo_uri: ssh://git@git.districtsolutions.ai:2222/District-Solutions/open-agent-tools-coder.git
+- repo_uri: https://github.com/district-solutions/open-agent-tools-coder.git
 
 ## File: oats/memory/models.py
 

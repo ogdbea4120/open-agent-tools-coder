@@ -3,11 +3,11 @@ CLI for the trajectory self-improvement report.
 
 Usage::
 
-    python -m coder.trajectory.report                 # 7-day markdown report
-    python -m coder.trajectory.report --since 30      # 30-day window
-    python -m coder.trajectory.report --json          # raw dict
+    python -m oats.trajectory.report                 # 7-day markdown report
+    python -m oats.trajectory.report --since 30      # 30-day window
+    python -m oats.trajectory.report --json          # raw dict
 
-The heavy lifting lives in :mod:`coder.trajectory.metrics`; this module is
+The heavy lifting lives in :mod:`oats.trajectory.metrics`; this module is
 just argument parsing and output formatting.
 """
 from __future__ import annotations
