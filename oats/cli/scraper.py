@@ -314,9 +314,9 @@ async def scrape_page(
 
     # ── Upload to S3 ────────────────────────────────────────────────
     if upload_to_s3:
-        if os.getenv('CODER_S3_DISABLED', '0') == '0':
+        if os.getenv('CODER_S3_DISABLED', '1') == '1':
             if verbose:
-                console.print('s3 upload disabled')
+                console.print('s3 upload disabled - set export CODER_S3_DISABLED=0')
         else:
             try:
                 _upload_scrape_to_s3(result, s3_prefix=s3_prefix, session_id=session_id, verbose=verbose)
