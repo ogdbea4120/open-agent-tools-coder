@@ -391,7 +391,6 @@ async def run_interactive(
                     new_provider = parts[1].strip()
                     provider_id = new_provider
                     os.environ["VLLM_PROVIDER_ID"] = provider_id
-                    os.environ["CODER_PROVIDER_ID"] = provider_id
                     session.info.provider_id = provider_id
                     import oats.core.config as _cfg
                     import oats.provider.provider as _prov
