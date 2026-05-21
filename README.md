@@ -2,7 +2,19 @@
 
 Open Agent Tools (oats) enables small-to-large self-hosted ai models to use local source code when running tool-calling agentic workloads. We actively data mine 20,970+ (2+ TB) popular github repos using large and small ai models to create reuseable: json, markdown and parquet files for local-first tool-calling models. How does it work? Over multiple passes, we compile and export a fast, compressed prompt index for all python source code in any repo. Agents refer to the local prompt index to use already-written source code on disk instead of http with mcp or having an expensive frontier ai model re-build something that is already working locally with expensive tokens. We use oats to free up large model tokens usage by delegating the local tool-calling to smaller, open source ai models.
 
-![Open Agent Tools (oats) - Architecture - Intro Tool Calling Pipeline for Powering Up Small AI Models](https://raw.githubusercontent.com/district-solutions/open-agent-tools-coder/refs/heads/main/stack/img/oats-intro.jpg)
+## 📺 Video Tutorials
+
+### Local AI - Setting up the OATs Coding Agent - Environment Variables and Config File
+
+  [![Local AI - Setting up the OATs Coding Agent - Environment Variables and Config File](http://img.youtube.com/vi/iGFP1HSp_oM/mqdefault.jpg)](https://www.youtube.com/iGFP1HSp_oM)
+
+### Local AI - Setting up the OATs Coding Agent - Environment Variables and Config File
+
+  [![Live Agentic Development with Two OATs Coders at Once - Building a New Command into Coder for Reading JSON Files](http://img.youtube.com/vi/MQCFh_AGs5U/mqdefault.jpg)](https://www.youtube.com/watch?v=MQCFh_AGs5U)
+
+### Local AI - Agentic Coding - Building Host Monitoring
+
+  [![Local AI - Agentic Coding - Building Host Monitoring](http://img.youtube.com/vi/MkTts2XeQGo/mqdefault.jpg)](https://www.youtube.com/embed/MkTts2XeQGo)
 
 [![OATs Docs](https://readthedocs.org/projects/open-agent-tools-coder/badge/?version=latest)](https://open-agent-tools-coder.readthedocs.io/en/latest/?badge=latest)
 
@@ -13,6 +25,8 @@ Open Agent Tools (oats) enables small-to-large self-hosted ai models to use loca
 - [Find more OATs Prompt Indices Datasets on HuggingFace](https://huggingface.co/datasets/open-agent-tools/open-tools)
 
 ![Example Knowledge Graph with Semantic Tree for Litigation Tool-Calling](https://raw.githubusercontent.com/district-solutions/open-agent-tools-coder/refs/heads/main/stack/img/open-agent-tools-example-knowledge-graph-with-an-example-semantic-tree-for-ligitation-tool-calling.jpg)
+
+![Open Agent Tools (oats) - Architecture - Intro Tool Calling Pipeline for Powering Up Small AI Models](https://raw.githubusercontent.com/district-solutions/open-agent-tools-coder/refs/heads/main/stack/img/oats-intro.jpg)
 
 ## Supported Coder Slash Commands
 
@@ -32,6 +46,7 @@ Here are the supprted internal **slash** commands:
 - /files - view the current files
 - /diff - view the git diff for the repo (assuming coder is running in a git repo)
 - /log - view the logs
+- /json FILE - pretty-print the json FILE contents
 - /history - view the chat history
 - /tools - view the default tools
 - /model - view the current provider model

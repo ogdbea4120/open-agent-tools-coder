@@ -1,0 +1,12 @@
+{
+    "company_name": "IndustrialForge Manufacturing",
+    "company_url": "https://www.industrialforge.com",
+    "product_category": "Industrial Equipment & Supplies",
+    "featured_product": "CNC Precision Milling Machine X700",
+    "featured_product_price": 45999.99,
+    "currency": "USD",
+    "in_stock": true,
+    "shipping_weight_kg": 2850,
+    "warranty_years": 5,
+    "certifications": ["ISO 9001", "CE Marked", "UL Listed"]
+}

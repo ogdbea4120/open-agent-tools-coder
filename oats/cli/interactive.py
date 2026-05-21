@@ -295,6 +295,12 @@ async def run_interactive(
                 _print_config(console=console)
                 continue
 
+            elif cmd == "/json":
+                from oats.cli.cmd.slash_json_command import handle_json_command
+                args_str = user_input[len(cmd):].strip()
+                handle_json_command(args_str, console=console)
+                continue
+
             elif cmd == "/profile":
                 from oats.core.profiles import get_profile, describe_profile
                 profile = get_profile()

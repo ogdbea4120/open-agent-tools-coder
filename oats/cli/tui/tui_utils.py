@@ -532,6 +532,7 @@ def _print_help(console: Console):
         ("/tools", "List available tools"),
         ("/files", "Show files read/written this session"),
         ("/config", "Show active configuration"),
+        ("/json <file>", "Read and display a JSON file (local or s3://)"),
         ("/profile", "Show feature profile (minimal/standard/full)"),
         ("", ""),
         ("/diff", "Show git diff (staged + unstaged)"),
