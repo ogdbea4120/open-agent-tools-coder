@@ -6,11 +6,11 @@ Open Agent Tools (oats) enables small-to-large self-hosted ai models to use loca
 
 ### Local AI - Setting up the OATs Coding Agent - Environment Variables and Config File
 
-  [![Local AI - Setting up the OATs Coding Agent - Environment Variables and Config File](http://img.youtube.com/vi/iGFP1HSp_oM/mqdefault.jpg)](https://www.youtube.com/iGFP1HSp_oM)
+  [![Local AI - Setting up the OATs Coding Agent - Environment Variables and Config File](http://img.youtube.com/vi/iGFP1HSp_oM/mqdefault.jpg)](https://www.youtube.com/watch?v=iGFP1HSp_oM)
 
 ### Local AI - Setting up the OATs Coding Agent - Environment Variables and Config File
 
-  [![Live Agentic Development with Two OATs Coders at Once - Building a New Command into Coder for Reading JSON Files](http://img.youtube.com/vi/MQCFh_AGs5U/mqdefault.jpg)](https://www.youtube.com/watch?v=MQCFh_AGs5U)
+  [![Live Agentic Development with Two OATs Coders at Once - Building a New Command into Coder for Reading JSON Files](http://img.youtube.com/vi/MQCFh_AGs5U/mqdefault.jpg)](https://www.youtube.com/embed/MQCFh_AGs5U)
 
 ### Local AI - Agentic Coding - Building Host Monitoring
 
